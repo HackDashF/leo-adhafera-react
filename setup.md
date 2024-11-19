@@ -1,4 +1,4 @@
 # Project Setup
 
 ## Initialization
-1. `pnpx create-react-app .`
+1. `pnpm create react-app . --template typescript`
