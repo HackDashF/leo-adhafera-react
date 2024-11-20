@@ -8,6 +8,7 @@
 
 ## Added Packages
 - `pnpm add react-router-dom`
+- `pnpm add @types/react-router-dom -D` (development dependancy)
 
 
 ## Planning
