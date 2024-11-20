@@ -1,16 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Lists from "./pages/Lists";
+import AppRouter from "./Router";
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/lists" element={<Lists />} />
-      </Routes>
-    </Router>
-  );
+  return <AppRouter />;
 }
 
 export default App;
