@@ -14,7 +14,7 @@ const AppRouter = () => (
       <Route path="/login" element={<Login />} />
       {/* jwt restricted */}
       <Route path="/lists" element={<Lists />} />
-      <Route path="/list" element={<List />} />
+      <Route path="/lists/:listID" element={<List />} />
     </Routes>
   </Router>
 );
