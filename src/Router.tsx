@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import AuthenticatedRoutes from "./pages/AuthenticatedRoutes";
-import Lists from "./pages/Lists";
-import List from "./pages/List";
+import SavedLists from "./pages/SavedLists";
+import SavedList from "./pages/SavedList";
 import Login from "./pages/Login";
 import NewAccount from "./pages/NewAccount";
 import TempList from "./pages/TempList";
@@ -15,8 +15,8 @@ const AppRouter = () => (
       <Route path="/login" element={<Login />} />
       {/* jwt restricted */}
       <Route element={<AuthenticatedRoutes />}>
-        <Route path="/lists" element={<Lists />} />
-        <Route path="/lists/:listID" element={<List />} />
+        <Route path="/lists" element={<SavedLists />} />
+        <Route path="/lists/:listID" element={<SavedList />} />
       </Route>
     </Routes>
   </Router>
