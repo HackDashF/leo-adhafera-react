@@ -8,7 +8,10 @@
 
 ## Added Packages
 - `pnpm add react-router-dom`
-- `pnpm add @types/react-router-dom -D` (development dependancy)
+(development dependancies)
+- `pnpm add @types/react-router-dom -D`
+- `pnpm add tailwindcss postcss autoprefixer -D`
+  - `pnpm dlx tailwindcss init -p`
 
 
 ## Planning
