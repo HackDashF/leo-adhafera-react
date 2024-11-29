@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.css";
-import { AppProvider } from "./context/AppContext";
+import { AuthProvider } from "./context/AuthContext";
 import AppRouter from "./Router";
 
 function App() {
   return (
-    <AppProvider>
+    <AuthProvider>
       <AppRouter />
-    </AppProvider>
+    </AuthProvider>
   );
 }
 
