@@ -7,9 +7,10 @@ export interface List {
   title: string;
   type: ListTypes; // list_type
   createdAt: Date; // created_at | need to ensure this gets parsed correctly from the Django API
+  listPosition: number;
 
   items: ListItem[];
-  // listusers
+  listUsers: string[]; // usernames
 }
 
 export interface ListItem {
@@ -18,4 +19,14 @@ export interface ListItem {
   quantity: number; // only for Quantities lists
   text: string;
   checked: boolean;
+}
+
+// for mutations
+
+export interface ListCreateFields {
+  title: string;
+  type?: ListTypes; // list_type
+  listPosition?: number;
+
+  // items: ListItem[]; // currently, server doesn't support nested item creation
 }

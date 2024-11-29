@@ -1,29 +1,48 @@
-import { List, ListItem, ListTypes } from "../List";
+import { List, ListCreateFields, ListItem, ListTypes } from "../List";
 
 // Django API provides snake case values
 // these transformers give us the data
 // in our TypeScript camel case objects
 
-/*
-
-// Usage example with fetch
-const fetchList = async (listId: number): Promise<List> => {
-    const response = await fetch(`/api/lists/${listId}/`);
-    const data = await response.json();
-    return transformList(data);
-};
-
-*/
+// List transformers
 
 export interface SnakeCaseList {
   id: number;
   title: string;
-  type: ListTypes; // list_type
-  created_at: Date; // created_at | need to ensure this gets parsed correctly from the Django API
+  list_type: ListTypes;
+  created_at: Date; // need to ensure this gets parsed correctly from the Django API
+  list_position: number;
 
   items: SnakeCaseListItem[];
-  // listusers
+  listusers: string[]; // usernames
 }
+
+export const listFromSnakeCase = (list: SnakeCaseList): List => ({
+  id: list.id,
+  title: list.title,
+  type: list.list_type,
+  createdAt: new Date(list.created_at),
+  listPosition: list.list_position,
+
+  items: list.items.map((li) => listItemFromSnakeCase(li)),
+  listUsers: list.listusers, // just strings
+});
+
+export interface SnakeCaseListCreateFields {
+  title: string;
+  list_type?: ListTypes;
+  list_position?: number;
+}
+
+export const listCreateFieldsToSnakeCase = (
+  list: ListCreateFields,
+): SnakeCaseListCreateFields => ({
+  title: list.title,
+  list_type: list.type,
+  list_position: list.listPosition,
+});
+
+// ListItem transformers
 
 export interface SnakeCaseListItem {
   id: number;
@@ -33,18 +52,19 @@ export interface SnakeCaseListItem {
   checked: boolean;
 }
 
-export const transformList = (list: SnakeCaseList): List => ({
-  id: list.id,
-  title: list.title,
-  type: list.type,
-  createdAt: new Date(list.created_at),
-
-  items: list.items.map((li) => transformListItem(li)),
-});
-
-export const transformListItem = (list: SnakeCaseListItem): ListItem => ({
+export const listItemFromSnakeCase = (list: SnakeCaseListItem): ListItem => ({
   id: list.id,
   sequencePosition: list.sequence_position,
+  quantity: list.quantity,
+  text: list.text,
+  checked: list.checked,
+});
+
+// TODO TODO TODO
+
+export const listItemToSnakeCase = (list: ListItem): SnakeCaseListItem => ({
+  id: list.id,
+  sequence_position: list.sequencePosition,
   quantity: list.quantity,
   text: list.text,
   checked: list.checked,
