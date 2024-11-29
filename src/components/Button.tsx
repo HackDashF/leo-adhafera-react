@@ -1,9 +1,7 @@
 import { SVGIcon } from "../types/SVGIcon";
 
-type ButtonProps = {
-  onClick: () => void;
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   label: string;
-  disabled?: boolean;
   icon?: SVGIcon;
 };
 
@@ -17,18 +15,17 @@ type ButtonProps = {
 
 // TODO: revisit styles
 
-export function Button({ onClick, label, icon: Icon, disabled }: ButtonProps) {
+export function Button({ label, icon: Icon, ...props }: ButtonProps) {
   return (
     <button
-      onClick={onClick}
-      disabled={disabled}
       style={{
         display: "flex",
         alignItems: "center",
-        backgroundColor: disabled ? "gray" : "blue",
+        backgroundColor: props.disabled ? "gray" : "blue",
         color: "white",
-        cursor: disabled ? "not-allowed" : "pointer",
+        cursor: props.disabled ? "not-allowed" : "pointer",
       }}
+      {...props}
     >
       {Icon && (
         <span style={{ marginRight: "8px" }}>
