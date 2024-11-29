@@ -13,7 +13,7 @@ export async function apiRequest<T, R = T>(
       ? { success: true, data: transform ? transform(data) : data }
       : {
           success: false,
-          error: { message: "Request failed", fields: data.errors },
+          error: { message: "Request failed", fields: data },
         };
   } catch {
     return {
