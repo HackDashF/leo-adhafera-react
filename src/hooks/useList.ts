@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { List } from "../types/List";
-import { transformList } from "../types/dataMapppers/ListMapper";
+import { listFromSnakeCase } from "../types/dataMapppers/ListMapper";
+import { API_URL } from "../config";
 
 export const useList = (listId: string | undefined) => {
   const [list, setList] = useState<List | null>(null);
@@ -16,16 +17,14 @@ export const useList = (listId: string | undefined) => {
       }
 
       try {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/adhafera/lists/${listId}/`,
-        );
+        const response = await fetch(`${API_URL}/adhafera/lists/${listId}/`);
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
-        const transformedList = transformList(data);
+        const transformedList = listFromSnakeCase(data);
         setList(transformedList);
         setError(null);
       } catch (e) {
