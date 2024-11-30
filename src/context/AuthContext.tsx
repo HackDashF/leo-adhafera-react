@@ -9,14 +9,14 @@ interface AuthContextType {
   setTokens: (tokens: AuthTokens | null) => void;
 }
 
-export const AuthContext = createContext<AuthContextType>({
+const AuthContext = createContext<AuthContextType>({
   user: null,
   setUser: () => {},
   tokens: null,
   setTokens: () => {},
 });
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [tokens, setTokens] = useState<AuthTokens | null>(null);
 
@@ -26,3 +26,5 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     </AuthContext.Provider>
   );
 };
+
+export { AuthProvider, AuthContext };
