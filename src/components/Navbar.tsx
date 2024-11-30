@@ -4,7 +4,7 @@ import { colors } from "../TEMP_CSS";
 import { AuthContext } from "../context/AuthContext";
 
 export const Navbar: React.FC = () => {
-  const { user } = useContext(AuthContext);
+  const { user, setUser, setTokens } = useContext(AuthContext);
 
   const navStyles: React.CSSProperties = {
     backgroundColor: colors.navBackgound,
@@ -47,6 +47,11 @@ export const Navbar: React.FC = () => {
     color: colors.titleText,
   };
 
+  const handleLogout = () => {
+    setUser(null);
+    setTokens(null);
+  };
+
   return (
     <nav style={navStyles}>
       <Link to="/" style={logoStyles}>
@@ -66,7 +71,9 @@ export const Navbar: React.FC = () => {
         {user ? (
           <>
             <span style={usernameStyles}>{user.username}</span>
-            <Link to="/login">Logout</Link>
+            <Link to="/login" onClick={handleLogout}>
+              Logout
+            </Link>
           </>
         ) : (
           <Link to="/login" style={linkStyles}>
