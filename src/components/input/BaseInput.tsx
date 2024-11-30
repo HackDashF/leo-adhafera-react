@@ -2,6 +2,7 @@ import React, { InputHTMLAttributes, useState } from "react";
 import { colors } from "../../TEMP_CSS";
 
 interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  styleContainer?: React.CSSProperties;
   label?: string;
   error?: string;
   helperText?: string;
@@ -12,12 +13,14 @@ export const BaseInput: React.FC<BaseInputProps> = ({
   error,
   helperText,
   disabled,
+  style,
+  styleContainer,
   ...props
 }) => {
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
 
-  const inputStyle: React.CSSProperties = {
+  const inputStyles: React.CSSProperties = {
     backgroundColor: colors.inputBackground,
     borderColor:
       hovered || focused
@@ -37,13 +40,15 @@ export const BaseInput: React.FC<BaseInputProps> = ({
     WebkitTextFillColor: colors.inputText,
 
     transition: "all 0.2s ease-in-out",
+    ...style,
   };
 
-  const containerStyle: React.CSSProperties = {
+  const containerStyles: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
     gap: "0.25rem",
     marginBottom: "1rem",
+    ...styleContainer,
   };
 
   const labelStyle: React.CSSProperties = {
@@ -60,14 +65,14 @@ export const BaseInput: React.FC<BaseInputProps> = ({
 
   return (
     <div
-      style={containerStyle}
-      onMouseEnter={() => setHovered(true)}
+      style={containerStyles}
+      onMouseEnter={() => setHovered(!disabled && true)}
       onMouseLeave={() => setHovered(false)}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
     >
       {label && <label style={labelStyle}>{label}</label>}
-      <input style={inputStyle} {...props} />
+      <input disabled={disabled} style={inputStyles} {...props} />
       {error && <p style={errorStyle}>{error}</p>}
       {helperText && !error && <p style={helperStyle}>{helperText}</p>}
     </div>
