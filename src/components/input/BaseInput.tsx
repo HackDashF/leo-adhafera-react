@@ -30,10 +30,9 @@ export const BaseInput: React.FC<BaseInputProps> = ({
           : colors.inputBorder,
     borderWidth: "1px",
     borderStyle: "solid",
-    color: colors.inputText,
+    color: disabled ? `${colors.inputText}88` : colors.inputText,
     padding: "8px",
     outline: "none",
-    opacity: disabled ? 0.7 : 1,
 
     // for autofill
     WebkitBoxShadow: "0 0 0 30px " + colors.inputBackground + " inset",
@@ -47,7 +46,6 @@ export const BaseInput: React.FC<BaseInputProps> = ({
     display: "flex",
     flexDirection: "column",
     gap: "0.25rem",
-    marginBottom: "1rem",
     ...styleContainer,
   };
 

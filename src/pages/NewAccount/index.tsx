@@ -69,6 +69,10 @@ const NewAccount = () => {
     color: colors.titleText,
   };
 
+  const inputContainerstyles: React.CSSProperties = {
+    marginBottom: "1rem",
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <h2 style={pageTitleStyles}>Create Account</h2>
@@ -77,7 +81,7 @@ const NewAccount = () => {
         <div className="error">{errors.non_field_errors.join(", ")}</div>
       )}
 
-      <div>
+      <div style={inputContainerstyles}>
         <TextInput
           label="Username"
           value={formData.username}
@@ -91,7 +95,7 @@ const NewAccount = () => {
         />
       </div>
 
-      <div>
+      <div style={inputContainerstyles}>
         <TextInput
           type="email"
           label="Email"
@@ -106,7 +110,7 @@ const NewAccount = () => {
         />
       </div>
 
-      <div>
+      <div style={inputContainerstyles}>
         <TextInput
           type="password"
           label="Password"
@@ -121,7 +125,7 @@ const NewAccount = () => {
         />
       </div>
 
-      <div>
+      <div style={inputContainerstyles}>
         <TextInput
           label="First Name (optional)"
           value={formData.firstName}
@@ -135,7 +139,7 @@ const NewAccount = () => {
         />
       </div>
 
-      <div>
+      <div style={inputContainerstyles}>
         <TextInput
           label="Last Name (optional)"
           value={formData.lastName}

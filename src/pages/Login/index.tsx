@@ -54,6 +54,10 @@ const Login = () => {
     color: colors.titleText,
   };
 
+  const inputContainerstyles: React.CSSProperties = {
+    marginBottom: "1rem",
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <h2 style={pageTitleStyles}>Login</h2>
@@ -62,7 +66,7 @@ const Login = () => {
         <div className="error">{errors.non_field_errors.join(", ")}</div>
       )}
 
-      <div>
+      <div style={inputContainerstyles}>
         <TextInput
           label="Username"
           value={formData.username}
@@ -76,7 +80,7 @@ const Login = () => {
         />
       </div>
 
-      <div>
+      <div style={inputContainerstyles}>
         <TextInput
           type="password"
           label="Password"
