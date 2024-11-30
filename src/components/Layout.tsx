@@ -9,7 +9,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
   };
 
   const contentStyles: React.CSSProperties = {
-    maxWidth: "1200px",
+    maxWidth: "800px",
     margin: "0 auto",
     padding: "0 1rem",
     width: "100%",

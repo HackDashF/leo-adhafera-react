@@ -23,6 +23,8 @@ export const colors = {
   inputBackground: colorCodes.darkNavyBlue,
   inputBorder: colorCodes.darkgrey,
 
+  independantIcons: colorCodes.gold, // username, page titles
+
   navLinkText: colorCodes.white, // New List, My Lists, Login/Logout
   titleText: colorCodes.gold, // username, page titles
   labelText: colorCodes.lightgrey, // username, page titles
