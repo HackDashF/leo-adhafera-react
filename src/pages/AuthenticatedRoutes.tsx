@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const AuthenticatedRoutes = () => {
-  const isAuthenticated = true; // need to check for JWT here
+  const { user, tokens } = useContext(AuthContext);
+  const isAuthenticated = user && tokens;
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
