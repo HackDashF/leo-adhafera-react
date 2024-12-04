@@ -4,8 +4,9 @@ import { SVGIcon } from "../types/SVGIcon";
 import CircularSpinner from "./CircularSpinner";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  label: string;
+  text?: string;
   icon?: SVGIcon;
+  iconColor?: string;
   error?: boolean;
   success?: boolean;
   loading?: boolean;
@@ -20,9 +21,10 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 // if we want buttons a specific width (uniform button width)
 
 export function Button({
-  label,
   disabled,
+  text,
   icon: Icon,
+  iconColor,
   error,
   success,
   loading,
@@ -32,6 +34,7 @@ export function Button({
 
   const inputStyle: React.CSSProperties = {
     display: "flex",
+    justifyContent: "center",
     alignItems: "center",
     padding: "8px 16px",
     backgroundColor: colors.inputBackground,
@@ -58,24 +61,18 @@ export function Button({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {loading ? (
-        <CircularSpinner />
-      ) : (
-        <>
-          {Icon && (
-            <span
-              style={{
-                marginRight: "8px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <Icon />
-            </span>
-          )}
-          {label}
-        </>
+      {Icon && (
+        <span
+          style={{
+            marginRight: text ? "8px" : undefined,
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          {loading ? <CircularSpinner /> : <Icon color={iconColor} />}
+        </span>
       )}
+      {text}
     </button>
   );
 }

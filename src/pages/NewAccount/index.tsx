@@ -155,7 +155,7 @@ const NewAccount = () => {
 
       <Button
         type="submit"
-        label="Create Account"
+        text="Create Account"
         // icon={}
       />
     </form>

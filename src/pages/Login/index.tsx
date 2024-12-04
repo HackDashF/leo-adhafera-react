@@ -97,7 +97,7 @@ const Login = () => {
 
       <Button
         type="submit"
-        label="Login"
+        text="Login"
         // icon={}
         // onClick={() => {}} // required?
       />
