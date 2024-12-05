@@ -78,7 +78,7 @@ const NewAccount = () => {
       <h2 style={pageTitleStyles}>Create Account</h2>
 
       {errors.non_field_errors && (
-        <div className="error">{errors.non_field_errors.join(", ")}</div>
+        <div>{errors.non_field_errors.join(", ")}</div>
       )}
 
       <div style={inputContainerstyles}>
@@ -92,6 +92,7 @@ const NewAccount = () => {
             }))
           }
           error={errors.username?.join(", ")}
+          borderColor={colors.inputBorder}
         />
       </div>
 
@@ -107,6 +108,7 @@ const NewAccount = () => {
             }))
           }
           error={errors.email?.join(", ")}
+          borderColor={colors.inputBorder}
         />
       </div>
 
@@ -122,6 +124,7 @@ const NewAccount = () => {
             }))
           }
           error={errors.password?.join(", ")}
+          borderColor={colors.inputBorder}
         />
       </div>
 
@@ -136,6 +139,7 @@ const NewAccount = () => {
             }))
           }
           error={errors.first_name?.join(", ")}
+          borderColor={colors.inputBorder}
         />
       </div>
 
@@ -150,6 +154,7 @@ const NewAccount = () => {
             }))
           }
           error={errors.last_name?.join(", ")}
+          borderColor={colors.inputBorder}
         />
       </div>
 

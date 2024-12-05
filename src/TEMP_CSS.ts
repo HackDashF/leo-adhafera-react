@@ -28,7 +28,7 @@ export const colors = {
   navLinkText: colorCodes.white, // New List, My Lists, Login/Logout
   titleText: colorCodes.gold, // username, page titles
   labelText: colorCodes.lightgrey, // username, page titles
-  inputText: colorCodes.white,
+  inputText: colorCodes.silver,
   errorText: colorCodes.error,
   text: colorCodes.white,
 };

@@ -1,11 +1,9 @@
-const List = () => {
-  return (
-    <div>
-      <h2>Temporary List</h2>
-      {/* login to save your list message */}
-      {/* list items from server */}
-    </div>
-  );
+import { BaseList } from "../../components/BaseList";
+import { useLocalStorage } from "../../hooks/useLocalStorageList";
+
+export const TempList = () => {
+  const storage = useLocalStorage();
+  return <BaseList storage={storage} />;
 };
 
-export default List;
+export default TempList;

@@ -54,6 +54,12 @@ const Login = () => {
     color: colors.titleText,
   };
 
+  const pageErrorStyles: React.CSSProperties = {
+    color: colors.errorText,
+    marginBottom: "15px",
+    fontSize: "1.2rem",
+  };
+
   const inputContainerstyles: React.CSSProperties = {
     marginBottom: "1rem",
   };
@@ -63,7 +69,7 @@ const Login = () => {
       <h2 style={pageTitleStyles}>Login</h2>
 
       {errors.non_field_errors && (
-        <div className="error">{errors.non_field_errors.join(", ")}</div>
+        <div style={pageErrorStyles}>{errors.non_field_errors.join(", ")}</div>
       )}
 
       <div style={inputContainerstyles}>
@@ -77,6 +83,7 @@ const Login = () => {
             }))
           }
           error={errors.username?.join(", ")}
+          borderColor={colors.inputBorder}
         />
       </div>
 
@@ -92,6 +99,7 @@ const Login = () => {
             }))
           }
           error={errors.password?.join(", ")}
+          borderColor={colors.inputBorder}
         />
       </div>
 

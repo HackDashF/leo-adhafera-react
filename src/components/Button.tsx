@@ -7,6 +7,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   text?: string;
   icon?: SVGIcon;
   iconColor?: string;
+  borderColor?: string;
   error?: boolean;
   success?: boolean;
   loading?: boolean;
@@ -25,9 +26,11 @@ export function Button({
   text,
   icon: Icon,
   iconColor,
+  borderColor = colors.inputBorder,
   error,
   success,
   loading,
+  style,
   ...props
 }: ButtonProps) {
   const [hovered, setHovered] = useState(false);
@@ -46,11 +49,12 @@ export function Button({
         ? colors.errorText
         : success
           ? "green"
-          : colors.inputBorder,
+          : borderColor,
     color: hovered ? "white" : colors.labelText,
     opacity: disabled ? 0.7 : 1,
     cursor: disabled ? "not-allowed" : "pointer",
     transition: "all 0.2s ease",
+    ...style,
   };
 
   return (

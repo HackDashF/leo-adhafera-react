@@ -2,10 +2,11 @@ import React, { InputHTMLAttributes, useState } from "react";
 import { colors } from "../../TEMP_CSS";
 
 interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  styleContainer?: React.CSSProperties;
   label?: string;
   error?: string;
   helperText?: string;
+  styleContainer?: React.CSSProperties;
+  borderColor: string;
 }
 
 export const BaseInput: React.FC<BaseInputProps> = ({
@@ -15,10 +16,13 @@ export const BaseInput: React.FC<BaseInputProps> = ({
   disabled,
   style,
   styleContainer,
+  borderColor,
   ...props
 }) => {
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
+
+  const textColor = disabled ? `${colors.inputText}88` : colors.inputText;
 
   const inputStyles: React.CSSProperties = {
     backgroundColor: colors.inputBackground,
@@ -27,16 +31,16 @@ export const BaseInput: React.FC<BaseInputProps> = ({
         ? colors.titleText
         : error
           ? colors.errorText
-          : colors.inputBorder,
+          : borderColor,
     borderWidth: "1px",
     borderStyle: "solid",
-    color: disabled ? `${colors.inputText}88` : colors.inputText,
+    color: textColor,
     padding: "8px",
     outline: "none",
 
     // for autofill
     WebkitBoxShadow: "0 0 0 30px " + colors.inputBackground + " inset",
-    WebkitTextFillColor: colors.inputText,
+    WebkitTextFillColor: textColor,
 
     transition: "all 0.2s ease-in-out",
     ...style,
