@@ -1,14 +1,11 @@
 import { useParams } from "react-router-dom";
+import { BaseList } from "../../components/BaseList";
+import { useAPIStorage } from "../../hooks/useAPIStorageList";
 
-const List = () => {
+export const SavedList = () => {
   const { listID } = useParams();
-  return (
-    <div>
-      {/* we'll use the list name here later */}
-      <h2>List {listID}</h2>
-      {/* list items from server */}
-    </div>
-  );
+  const storage = useAPIStorage(+(listID || 0));
+  return <BaseList storage={storage} />;
 };
 
-export default List;
+export default SavedList;

@@ -77,7 +77,7 @@ export const ListItem = memo(
           onChange={handleTextChange}
           disabled={!editMode}
           styleContainer={{
-            gridColumn: listType === "Quantities" ? "2 / 3" : "1 / 3",
+            gridColumn: listType === "Quantities" ? "2 / 5" : "1 / 5",
           }}
           style={{
             ...listInputStyles,
