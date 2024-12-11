@@ -6,12 +6,12 @@ import { colors } from "../../TEMP_CSS";
 export const listContainerStyles: React.CSSProperties = {
   display: "grid",
   gridAutoRows: "auto",
-  gridTemplateColumns: "80px 1fr 150px 90px 60px",
+  gridTemplateColumns: "80px 1fr 150px 124px 62px 62px",
 };
 
 export const listHeaderStyles: React.CSSProperties = {
   display: "grid",
-  gridColumn: "1 / 6",
+  gridColumn: "1 / 7",
   gridTemplateColumns: "subgrid",
   padding: "22px 0px",
 };
@@ -32,7 +32,7 @@ export const listTitleInputStyles: (
       };
 
 export const listTitleInputContainerStyles: React.CSSProperties = {
-  fontSize: "1.5rem",
+  fontSize: "1.75rem",
   gridColumn: "1 / 3",
 };
 
@@ -40,13 +40,13 @@ export const listTitleInputContainerStyles: React.CSSProperties = {
 
 export const listRowStyles: React.CSSProperties = {
   display: "grid",
-  gridColumn: "1 / 6",
+  gridColumn: "1 / 7",
   gridTemplateColumns: "subgrid",
   backgroundColor: colors.inputBackground,
 };
 
 export const listInputStyles: React.CSSProperties = {
-  fontSize: "1.3rem",
+  fontSize: "1.5rem",
   paddingLeft: "25px",
 };
 

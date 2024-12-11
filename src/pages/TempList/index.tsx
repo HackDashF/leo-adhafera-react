@@ -3,7 +3,7 @@ import { useLocalStorage } from "../../hooks/useLocalStorageList";
 
 export const TempList = () => {
   const storage = useLocalStorage();
-  return <BaseList storage={storage} />;
+  return <BaseList storage={storage} temp />;
 };
 
 export default TempList;

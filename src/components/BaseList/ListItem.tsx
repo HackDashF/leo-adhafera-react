@@ -67,6 +67,7 @@ export const ListItem = memo(
             style={{
               ...listInputStyles,
               pointerEvents: editMode ? "auto" : "none",
+              textAlign: "end",
             }}
             borderColor={colors.inputBackground}
           />
@@ -77,7 +78,7 @@ export const ListItem = memo(
           onChange={handleTextChange}
           disabled={!editMode}
           styleContainer={{
-            gridColumn: listType === "Quantities" ? "2 / 5" : "1 / 5",
+            gridColumn: listType === "Quantities" ? "2 / 6" : "1 / 6",
           }}
           style={{
             ...listInputStyles,

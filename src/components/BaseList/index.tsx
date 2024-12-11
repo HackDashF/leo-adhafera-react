@@ -15,10 +15,9 @@ import {
   listTitleInputStyles,
 } from "./styles";
 import { NumberInput } from "../input/NumberInput";
-import { BulletListIcon } from "../../icons/bulletList";
-import { QuantitiesListIcon } from "../../icons/quantitiesList";
 import { ListTypeSelect } from "../ListTypeSelect";
 import { ShareIcon } from "../../icons/shareIcon";
+import { RefreshIcon } from "../../icons/refresh";
 
 interface StorageHook {
   list: List | null;
@@ -36,9 +35,10 @@ interface StorageHook {
 
 interface BaseListProps {
   storage: StorageHook;
+  temp?: boolean;
 }
 
-export const BaseList = ({ storage }: BaseListProps) => {
+export const BaseList = ({ storage, temp }: BaseListProps) => {
   const {
     list,
     loading,
@@ -66,6 +66,11 @@ export const BaseList = ({ storage }: BaseListProps) => {
     }
   };
 
+  const handleSave = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    console.log("SAVE!");
+  };
+
   return (
     <div style={listContainerStyles}>
       <div style={listHeaderStyles}>
@@ -86,15 +91,33 @@ export const BaseList = ({ storage }: BaseListProps) => {
           onClick={() => setEditMode(!editMode)}
           text={editMode ? "Done" : "Edit"}
           iconColor={"white"}
+          style={{ margin: "0px 2px" }}
         />
-        {/* for temp list, need SAVE button
-            for saved list, need SHARE button */}
-        <Button
-          onClick={() => console.log("open share modal")}
-          icon={ShareIcon}
-          iconColor={colors.inputText}
-          disabled={editMode}
-        />
+        {temp ? (
+          <Button
+            onClick={(e) => handleSave(e)}
+            text={"Save"}
+            iconColor={"white"}
+            style={{ gridColumn: "5 / 7", margin: "0px 2px" }}
+          />
+        ) : (
+          <>
+            <Button
+              onClick={() => console.log("open share modal")}
+              icon={RefreshIcon}
+              iconColor={colors.inputText}
+              disabled={editMode}
+              style={{ margin: "0px 2px" }}
+            />
+            <Button
+              onClick={() => console.log("open share modal")}
+              icon={ShareIcon}
+              iconColor={colors.inputText}
+              disabled={editMode}
+              style={{ margin: "0px 2px" }}
+            />
+          </>
+        )}
       </div>
 
       {editMode && (
@@ -107,6 +130,7 @@ export const BaseList = ({ storage }: BaseListProps) => {
               style={{
                 ...listInputStyles,
                 pointerEvents: editMode ? "auto" : "none",
+                textAlign: "end",
               }}
               borderColor={colors.inputBackground}
             />
@@ -117,7 +141,7 @@ export const BaseList = ({ storage }: BaseListProps) => {
             placeholder="< new item >"
             borderColor={colors.inputBackground}
             styleContainer={{
-              gridColumn: list.type === "Quantities" ? "2 / 5" : "1 / 5",
+              gridColumn: list.type === "Quantities" ? "2 / 6" : "1 / 6",
             }}
             style={{
               ...listInputStyles,

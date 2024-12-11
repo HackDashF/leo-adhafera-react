@@ -44,17 +44,22 @@ export const ListTypeSelect = ({
       onClick={() => !disabled && setIsOpen(!isOpen)}
     >
       {isOpen ? (
-        <XIcon color={colors.labelText} />
+        <>
+          <span style={{ color: colors.labelText }}>( type )</span>
+          <span style={{ marginLeft: "10px" }}>
+            <XIcon color={colors.labelText} />
+          </span>
+        </>
       ) : (
         <>
+          {/* <span style={{ color: colors.inputText }}>
+            {selectedOption?.label}
+          </span> */}
           {Icon && (
-            <span style={{ marginRight: "8px" }}>
+            <span style={{ marginLeft: "10px" }}>
               <Icon color={colors.inputText} />
             </span>
           )}
-          <span style={{ color: colors.inputText }}>
-            {selectedOption?.label}
-          </span>
         </>
       )}
 
@@ -74,7 +79,8 @@ export const ListTypeSelect = ({
               onMouseEnter={() => setHoveredOption(option.type)}
               onMouseLeave={() => setHoveredOption(null)}
             >
-              <span style={{ marginRight: "8px" }}>
+              {option.label}
+              <span style={{ marginLeft: "10px" }}>
                 <option.icon
                   color={
                     hoveredOption === option.type && option.type !== value
@@ -83,7 +89,6 @@ export const ListTypeSelect = ({
                   }
                 />
               </span>
-              {option.label}
             </div>
           ))}
         </div>

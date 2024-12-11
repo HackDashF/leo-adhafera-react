@@ -6,6 +6,7 @@ export const getOptionStyles = (
   hovered: boolean,
 ): CSSProperties => ({
   display: "flex",
+  justifyContent: "flex-end",
   alignItems: "center",
   padding: "8px 16px",
   cursor: "pointer",
@@ -17,6 +18,7 @@ export const getOptionStyles = (
 export const getSelectStyles = (disabled: boolean): CSSProperties => ({
   position: "relative" as const,
   display: "flex",
+  justifyContent: "flex-end",
   alignItems: "center",
   padding: "8px 16px",
   backgroundColor: disabled ? colors.backgound : colors.inputBackground,
@@ -25,7 +27,7 @@ export const getSelectStyles = (disabled: boolean): CSSProperties => ({
   opacity: disabled ? 0.7 : 1,
   cursor: disabled ? "not-allowed" : "pointer",
   transition: "all 0.2s ease",
-  minWidth: "150px",
+  minWidth: "152px",
 });
 
 export const dropdownStyles: CSSProperties = {
