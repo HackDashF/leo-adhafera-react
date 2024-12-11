@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { List, ListItem } from "../types/List";
+import { List, ListItem, ListTypes } from "../types/List";
 
 interface ItemsMap {
   [key: number]: ListItem;
@@ -43,15 +43,19 @@ export const useLocalStorage = () => {
     setList(newList);
   };
 
+  const updateType = (type: ListTypes) => {
+    saveList({ ...list, type });
+  };
+
   const updateTitle = (title: string) => {
     saveList({ ...list, title });
   };
 
-  const addItem = (text: string) => {
+  const addItem = (text: string, qty?: number) => {
     const newItem: ListItem = {
       id: Date.now(),
       sequencePosition: Object.keys(itemsMap).length,
-      quantity: 1,
+      quantity: qty || 1,
       text,
       checked: false,
     };
@@ -107,6 +111,7 @@ export const useLocalStorage = () => {
   return {
     list,
     updateTitle,
+    updateType,
     addItem,
     updateItem,
     deleteItem,

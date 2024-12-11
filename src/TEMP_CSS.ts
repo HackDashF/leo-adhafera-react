@@ -10,6 +10,7 @@ const colorCodes = {
 
   black: "black",
   white: "white",
+  grey: "#2A2A2A",
   darkgrey: "#2b2b2b",
   lightgrey: "#717171",
   error: "#934343",
@@ -21,6 +22,7 @@ export const colors = {
   backgound: colorCodes.navyBlue,
 
   inputBackground: colorCodes.darkNavyBlue,
+  inputSelectedBackground: colorCodes.grey,
   inputBorder: colorCodes.darkgrey,
 
   independantIcons: colorCodes.gold, // username, page titles
