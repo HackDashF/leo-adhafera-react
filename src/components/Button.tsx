@@ -42,7 +42,7 @@ export function Button({
     padding: "8px 16px",
     backgroundColor: colors.inputBackground,
     border: `1px solid ${colors.inputBorder}`,
-    borderRadius: "2px",
+    borderRadius: "5px",
     borderColor: hovered
       ? colors.titleText
       : error

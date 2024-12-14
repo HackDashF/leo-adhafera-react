@@ -27,17 +27,17 @@ export const getSelectStyles = (disabled: boolean): CSSProperties => ({
   opacity: disabled ? 0.7 : 1,
   cursor: disabled ? "not-allowed" : "pointer",
   transition: "all 0.2s ease",
-  minWidth: "152px",
+  // minWidth: "148px",
 });
 
 export const dropdownStyles: CSSProperties = {
   position: "absolute" as const,
-  top: "100%",
-  left: 0,
-  right: 0,
+  top: "calc(100% + 4px)",
+  left: -92,
+  right: -1,
   backgroundColor: colors.inputBackground,
   border: `1px solid ${colors.inputBorder}`,
   borderTop: "none",
   borderRadius: "0 0 2px 2px",
-  zIndex: 1000,
+  zIndex: 2,
 };

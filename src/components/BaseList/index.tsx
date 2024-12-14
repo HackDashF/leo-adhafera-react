@@ -12,7 +12,7 @@ import {
   listInputStyles,
   listRowStyles,
   listTitleInputContainerStyles,
-  listTitleInputStyles,
+  getListTitleInputStyles,
 } from "./styles";
 import { NumberInput } from "../input/NumberInput";
 import { ListTypeSelect } from "../ListTypeSelect";
@@ -78,7 +78,7 @@ export const BaseList = ({ storage, temp }: BaseListProps) => {
           value={list.title}
           onChange={(e) => updateTitle(e.target.value)}
           disabled={!editMode}
-          style={listTitleInputStyles(editMode)}
+          style={getListTitleInputStyles(editMode)}
           styleContainer={listTitleInputContainerStyles}
           borderColor={colors.inputBackground}
         />
@@ -98,7 +98,7 @@ export const BaseList = ({ storage, temp }: BaseListProps) => {
             onClick={(e) => handleSave(e)}
             text={"Save"}
             iconColor={"white"}
-            style={{ gridColumn: "5 / 7", margin: "0px 2px" }}
+            style={{ gridColumn: "5 / 7", marginLeft: "2px" }}
           />
         ) : (
           <>

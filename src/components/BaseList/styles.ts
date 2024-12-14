@@ -6,7 +6,7 @@ import { colors } from "../../TEMP_CSS";
 export const listContainerStyles: React.CSSProperties = {
   display: "grid",
   gridAutoRows: "auto",
-  gridTemplateColumns: "80px 1fr 150px 124px 62px 62px",
+  gridTemplateColumns: "80px 1fr 60px 124px 62px 62px",
 };
 
 export const listHeaderStyles: React.CSSProperties = {
@@ -16,7 +16,7 @@ export const listHeaderStyles: React.CSSProperties = {
   padding: "22px 0px",
 };
 
-export const listTitleInputStyles: (
+export const getListTitleInputStyles: (
   editMode: boolean,
 ) => React.CSSProperties = (editMode) =>
   editMode
@@ -34,6 +34,7 @@ export const listTitleInputStyles: (
 export const listTitleInputContainerStyles: React.CSSProperties = {
   fontSize: "1.75rem",
   gridColumn: "1 / 3",
+  marginRight: "2px",
 };
 
 // -------------------------------------------- List Rows

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { colors } from "../../TEMP_CSS";
-import { XIcon } from "../../icons/xmark";
 import { listTypeOptions } from "./options";
 import { ListTypes } from "../../types/List";
 import { dropdownStyles, getOptionStyles, getSelectStyles } from "./styles";
+import { ChevronIcon } from "../../icons/chevron";
 
 interface ListTypeSelectProps {
   value: ListTypes;
@@ -45,16 +45,12 @@ export const ListTypeSelect = ({
     >
       {isOpen ? (
         <>
-          <span style={{ color: colors.labelText }}>( type )</span>
           <span style={{ marginLeft: "10px" }}>
-            <XIcon color={colors.labelText} />
+            <ChevronIcon color={colors.labelText} rotate={90} />
           </span>
         </>
       ) : (
         <>
-          {/* <span style={{ color: colors.inputText }}>
-            {selectedOption?.label}
-          </span> */}
           {Icon && (
             <span style={{ marginLeft: "10px" }}>
               <Icon color={colors.inputText} />
@@ -64,34 +60,71 @@ export const ListTypeSelect = ({
       )}
 
       {isOpen && (
-        <div style={dropdownStyles}>
-          {listTypeOptions.map((option) => (
+        <>
+          <div
+            style={{
+              position: "absolute" as const,
+              top: "95%",
+              left: -1,
+              right: -1,
+              height: "40px",
+              minHeight: "40px",
+              // width: "100%",
+              // minWidth: "100%",
+              backgroundColor: colors.inputBackground,
+              borderLeft: `1px solid ${colors.inputBorder}`,
+              borderRight: `1px solid ${colors.inputBorder}`,
+            }}
+          ></div>
+          <div style={dropdownStyles}>
             <div
-              key={option.type}
-              style={getOptionStyles(
-                option.type === value,
-                option.type === hoveredOption,
-              )}
-              onClick={() => {
-                onChange(option.type);
-                setIsOpen(false);
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
               }}
-              onMouseEnter={() => setHoveredOption(option.type)}
-              onMouseLeave={() => setHoveredOption(null)}
             >
-              {option.label}
-              <span style={{ marginLeft: "10px" }}>
-                <option.icon
-                  color={
-                    hoveredOption === option.type && option.type !== value
-                      ? colors.titleText
-                      : colors.labelText
-                  }
-                />
-              </span>
+              <div
+                style={{
+                  width: "100%",
+                  borderTop: `1px solid ${colors.inputBorder}`,
+                  borderTopLeftRadius: "5px",
+                }}
+              ></div>
+              <div
+                style={{
+                  minWidth: "49px",
+                  marginLeft: "10px",
+                }}
+              ></div>
             </div>
-          ))}
-        </div>
+            {listTypeOptions.map((option) => (
+              <div
+                key={option.type}
+                style={getOptionStyles(
+                  option.type === value,
+                  option.type === hoveredOption,
+                )}
+                onClick={() => {
+                  onChange(option.type);
+                  setIsOpen(false);
+                }}
+                onMouseEnter={() => setHoveredOption(option.type)}
+                onMouseLeave={() => setHoveredOption(null)}
+              >
+                {option.label}
+                <span style={{ marginLeft: "10px" }}>
+                  <option.icon
+                    color={
+                      hoveredOption === option.type && option.type !== value
+                        ? colors.titleText
+                        : colors.labelText
+                    }
+                  />
+                </span>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
