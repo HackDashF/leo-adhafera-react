@@ -11,9 +11,10 @@ export const listsAPI = {
   getLists: (token: string) =>
     apiRequest<SnakeCaseList[], List[]>(
       () =>
-        fetch(`${API_URL}/lists/`, {
+        fetch(`${API_URL}/adhafera/lists/`, {
           headers: {
             Authorization: `JWT ${token}`,
+            Accept: "application/json",
           },
         }),
       (lists) => lists.map(listFromSnakeCase),
@@ -22,9 +23,10 @@ export const listsAPI = {
   getList: (token: string, listId: number) =>
     apiRequest<SnakeCaseList, List>(
       () =>
-        fetch(`${API_URL}/lists/${listId}`, {
+        fetch(`${API_URL}/adhafera/lists/${listId}`, {
           headers: {
             Authorization: `JWT ${token}`,
+            Accept: "application/json",
           },
         }),
       listFromSnakeCase,
@@ -33,11 +35,12 @@ export const listsAPI = {
   createList: (token: string, fields: ListCreateFields) =>
     apiRequest<SnakeCaseList, List>(
       () =>
-        fetch(`${API_URL}/lists/`, {
+        fetch(`${API_URL}/adhafera/lists/`, {
           method: "POST",
           headers: {
             Authorization: `JWT ${token}`,
             "Content-Type": "application/json",
+            Accept: "application/json",
           },
           body: JSON.stringify(listCreateFieldsToSnakeCase(fields)),
         }),
@@ -51,11 +54,12 @@ export const listsAPI = {
   ) =>
     apiRequest<SnakeCaseList, List>(
       () =>
-        fetch(`${API_URL}/lists/${listId}`, {
+        fetch(`${API_URL}/adhafera/lists/${listId}`, {
           method: "PATCH",
           headers: {
             Authorization: `JWT ${token}`,
             "Content-Type": "application/json",
+            Accept: "application/json",
           },
           body: JSON.stringify(
             listCreateFieldsToSnakeCase(updates as ListCreateFields),
@@ -66,21 +70,23 @@ export const listsAPI = {
 
   deleteList: (token: string, listId: number) =>
     apiRequest<void>(() =>
-      fetch(`${API_URL}/lists/${listId}`, {
+      fetch(`${API_URL}/adhafera/lists/${listId}`, {
         method: "DELETE",
         headers: {
           Authorization: `JWT ${token}`,
+          Accept: "application/json",
         },
       }),
     ),
 
   joinList: (token: string, shareCode: string) =>
     apiRequest<void>(() =>
-      fetch(`${API_URL}/lists/join/`, {
+      fetch(`${API_URL}/adhafera/lists/join/`, {
         method: "POST",
         headers: {
           Authorization: `JWT ${token}`,
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({ share_code: shareCode }),
       }),
@@ -89,11 +95,12 @@ export const listsAPI = {
   getShareCode: (token: string, listId: number, username: string) =>
     apiRequest<{ share_code: string }, string>(
       () =>
-        fetch(`${API_URL}/lists/${listId}/share`, {
+        fetch(`${API_URL}/adhafera/lists/${listId}/share`, {
           method: "POST",
           headers: {
             Authorization: `JWT ${token}`,
             "Content-Type": "application/json",
+            Accept: "application/json",
           },
           body: JSON.stringify({ username }),
         }),

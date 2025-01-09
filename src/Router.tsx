@@ -17,6 +17,8 @@ import TempList from "./pages/TempList";
 
 const RootRedirect = () => {
   const { user, tokens } = useContext(AuthContext);
+  console.log(user);
+  console.log(tokens);
   return <Navigate to={user && tokens ? "/lists" : "/templist"} replace />;
 };
 

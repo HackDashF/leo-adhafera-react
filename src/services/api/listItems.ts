@@ -22,6 +22,7 @@ export const listItemsAPI = {
           headers: {
             Authorization: `JWT ${token}`,
             "Content-Type": "application/json",
+            Accept: "application/json",
           },
           body: JSON.stringify(params),
         }),
@@ -41,6 +42,7 @@ export const listItemsAPI = {
           headers: {
             Authorization: `JWT ${token}`,
             "Content-Type": "application/json",
+            Accept: "application/json",
           },
           body: JSON.stringify(updates),
         }),
@@ -53,6 +55,7 @@ export const listItemsAPI = {
         method: "DELETE",
         headers: {
           Authorization: `JWT ${token}`,
+          Accept: "application/json",
         },
       }),
     ),

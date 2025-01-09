@@ -18,6 +18,7 @@ export const authAPI = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(credentials),
       }),
@@ -29,6 +30,7 @@ export const authAPI = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(credentials),
       }),
@@ -40,6 +42,7 @@ export const authAPI = {
         fetch(`${API_URL}/auth/users/me/`, {
           headers: {
             Authorization: `JWT ${token}`,
+            Accept: "application/json",
           },
         }),
       userFromSnakeCase,
@@ -51,6 +54,7 @@ export const authAPI = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({ refresh: token }),
       }),
@@ -62,6 +66,7 @@ export const authAPI = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({ token }),
       }),

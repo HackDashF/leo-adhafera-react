@@ -5,9 +5,11 @@ interface ItemsMap {
   [key: number]: ListItem;
 }
 
+const localStorageDataKey = "temp-list";
+
 export const useLocalStorage = () => {
   const [list, setList] = useState<List>(() => {
-    const saved = localStorage.getItem(`temp-list`);
+    const saved = localStorage.getItem(localStorageDataKey);
     if (!saved) {
       const newList: List = {
         id: -1, // will be given an ID if saved to API later
@@ -38,17 +40,17 @@ export const useLocalStorage = () => {
     ),
   );
 
-  const saveList = (newList: List) => {
+  const saveListToLocalStorage = (newList: List) => {
     localStorage.setItem(`temp-list`, JSON.stringify(newList));
     setList(newList);
   };
 
   const updateType = (type: ListTypes) => {
-    saveList({ ...list, type });
+    saveListToLocalStorage({ ...list, type });
   };
 
   const updateTitle = (title: string) => {
-    saveList({ ...list, title });
+    saveListToLocalStorage({ ...list, title });
   };
 
   const addItem = (text: string, qty?: number) => {
@@ -67,7 +69,7 @@ export const useLocalStorage = () => {
       ...list,
       items: Object.values(newItemsMap),
     };
-    saveList(newList);
+    saveListToLocalStorage(newList);
   };
 
   const updateItem = useCallback(
@@ -82,7 +84,7 @@ export const useLocalStorage = () => {
           ...list,
           items: Object.values(updated),
         };
-        saveList(newList);
+        saveListToLocalStorage(newList);
 
         return updated;
       });
@@ -100,7 +102,7 @@ export const useLocalStorage = () => {
           ...list,
           items: Object.values(updated),
         };
-        saveList(newList);
+        saveListToLocalStorage(newList);
 
         return updated;
       });
