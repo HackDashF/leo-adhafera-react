@@ -1,22 +1,27 @@
-import { useState, useEffect, useCallback } from "react";
-import {
-  listFromSnakeCase,
-  listItemFromSnakeCase,
-} from "../types/dataMapppers/ListMapper";
+import { useState, useEffect, useCallback, useContext } from "react";
 import { List, ListItem, ListTypes } from "../types/List";
+import { AuthContext } from "../context/AuthContext";
+import { listsAPI } from "../services/api/lists";
+import { listItemsAPI } from "../services/api/listItems";
 
 export const useAPIStorage = (listId: number) => {
   const [list, setList] = useState<List | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+  const { tokens } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchList = async () => {
+      if (!tokens?.access) return;
+
       try {
-        const response = await fetch(`/api/lists/${listId}/`);
-        if (!response.ok) throw new Error("Failed to fetch list");
-        const data = await response.json();
-        setList(listFromSnakeCase(data));
+        const response = await listsAPI.getList(tokens.access, listId);
+        if (response.success) {
+          setList(response.data);
+          setError(null);
+        } else {
+          throw new Error(response.error.message);
+        }
       } catch (err) {
         setError(err instanceof Error ? err : new Error("Unknown error"));
       } finally {
@@ -25,65 +30,65 @@ export const useAPIStorage = (listId: number) => {
     };
 
     fetchList();
-  }, [listId]);
+  }, [listId, tokens?.access]);
 
   const updateTitle = async (title: string) => {
-    if (!list) return;
+    if (!list || !tokens?.access) return;
 
     try {
-      const response = await fetch(`/api/lists/${listId}/`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title }),
+      const response = await listsAPI.updateList(tokens.access, listId, {
+        title,
       });
-
-      if (!response.ok) throw new Error("Failed to update title");
-
-      setList((prev) => (prev ? { ...prev, title } : null));
+      if (response.success) {
+        setList(response.data);
+        setError(null);
+      } else {
+        throw new Error(response.error.message);
+      }
     } catch (err) {
       setError(err instanceof Error ? err : new Error("Unknown error"));
     }
   };
 
   const updateType = async (type: ListTypes) => {
-    if (!list) return;
+    if (!list || !tokens?.access) return;
 
     try {
-      const response = await fetch(`/api/lists/${listId}/`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type }),
+      const response = await listsAPI.updateList(tokens.access, listId, {
+        type,
       });
-
-      if (!response.ok) throw new Error("Failed to update type");
-
-      setList((prev) => (prev ? { ...prev, type } : null));
+      if (response.success) {
+        setList(response.data);
+        setError(null);
+      } else {
+        throw new Error(response.error.message);
+      }
     } catch (err) {
       setError(err instanceof Error ? err : new Error("Unknown error"));
     }
   };
 
-  const addItem = async (text: string) => {
-    if (!list) return;
+  const addItem = async (text: string, quantity?: number) => {
+    if (!list || !tokens?.access) return;
 
     try {
-      const response = await fetch(`/api/lists/${listId}/items/`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text }),
+      const response = await listItemsAPI.createItem(tokens.access, listId, {
+        text,
+        quantity,
       });
-
-      if (!response.ok) throw new Error("Failed to add item");
-
-      const newItem = listItemFromSnakeCase(await response.json());
-      setList((prev) =>
-        prev
-          ? {
-              ...prev,
-              items: [...prev.items, newItem],
-            }
-          : null,
-      );
+      if (response.success) {
+        setList((prev) =>
+          prev
+            ? {
+                ...prev,
+                items: [...prev.items, response.data],
+              }
+            : null,
+        );
+        setError(null);
+      } else {
+        throw new Error(response.error.message);
+      }
     } catch (err) {
       setError(err instanceof Error ? err : new Error("Unknown error"));
     }
@@ -91,56 +96,63 @@ export const useAPIStorage = (listId: number) => {
 
   const updateItem = useCallback(
     async (itemId: number, updates: Partial<ListItem>) => {
-      if (!list) return; // maybe throw error?
+      if (!list || !tokens?.access) return;
 
       try {
-        const response = await fetch(`/api/lists/${listId}/items/${itemId}/`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(updates),
-        });
-
-        if (!response.ok) throw new Error("Failed to update item");
-
-        setList((prev) => {
-          if (!prev) return null;
-          return {
-            ...prev,
-            items: prev.items.map((item) =>
-              item.id === itemId ? { ...item, ...updates } : item,
-            ),
-          };
-        });
+        const response = await listItemsAPI.updateItem(
+          tokens.access,
+          listId,
+          itemId,
+          updates,
+        );
+        if (response.success) {
+          setList((prev) => {
+            if (!prev) return null;
+            return {
+              ...prev,
+              items: prev.items.map((item) =>
+                item.id === itemId ? response.data : item,
+              ),
+            };
+          });
+          setError(null);
+        } else {
+          throw new Error(response.error.message);
+        }
       } catch (err) {
         setError(err instanceof Error ? err : new Error("Unknown error"));
       }
     },
-    [listId, list],
+    [listId, list, tokens?.access],
   );
 
   const deleteItem = useCallback(
     async (itemId: number) => {
-      if (!list) return;
+      if (!list || !tokens?.access) return;
 
       try {
-        const response = await fetch(`/api/lists/${listId}/items/${itemId}/`, {
-          method: "DELETE",
-        });
-
-        if (!response.ok) throw new Error("Failed to delete item");
-
-        setList((prev) => {
-          if (!prev) return null;
-          return {
-            ...prev,
-            items: prev.items.filter((item) => item.id !== itemId),
-          };
-        });
+        const response = await listItemsAPI.deleteItem(
+          tokens.access,
+          listId,
+          itemId,
+        );
+        if (response.success) {
+          setList((prev) => {
+            if (!prev) return null;
+            return {
+              ...prev,
+              items: prev.items.filter((item) => item.id !== itemId),
+            };
+          });
+          setError(null);
+        } else {
+          throw new Error(response.error.message);
+        }
       } catch (err) {
         setError(err instanceof Error ? err : new Error("Unknown error"));
       }
     },
-    [listId, list],
+    [listId, list, tokens?.access],
   );
 
   return {

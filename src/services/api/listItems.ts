@@ -17,7 +17,7 @@ export const listItemsAPI = {
   ) =>
     apiRequest<SnakeCaseListItem, ListItem>(
       () =>
-        fetch(`${API_URL}/lists/${listId}/items/`, {
+        fetch(`${API_URL}/adhafera/lists/${listId}/items/`, {
           method: "POST",
           headers: {
             Authorization: `JWT ${token}`,
@@ -37,7 +37,7 @@ export const listItemsAPI = {
   ) =>
     apiRequest<SnakeCaseListItem, ListItem>(
       () =>
-        fetch(`${API_URL}/lists/${listId}/items/${itemId}/`, {
+        fetch(`${API_URL}/adhafera/lists/${listId}/items/${itemId}/`, {
           method: "PATCH",
           headers: {
             Authorization: `JWT ${token}`,
@@ -51,7 +51,7 @@ export const listItemsAPI = {
 
   deleteItem: (token: string, listId: number, itemId: number) =>
     apiRequest<void>(() =>
-      fetch(`${API_URL}/lists/${listId}/items/${itemId}/`, {
+      fetch(`${API_URL}/adhafera/lists/${listId}/items/${itemId}/`, {
         method: "DELETE",
         headers: {
           Authorization: `JWT ${token}`,
